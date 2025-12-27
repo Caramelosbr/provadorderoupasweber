@@ -73,7 +73,7 @@ categorySchema.virtual('subcategories', {
 });
 
 // Índices
-categorySchema.index({ slug: 1 });
+// ✅ REMOVIDO: categorySchema.index({ slug: 1 }); - Duplicado, já está como unique no schema
 categorySchema.index({ parent: 1 });
 categorySchema.index({ isActive: 1, order: 1 });
 

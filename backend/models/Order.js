@@ -147,7 +147,7 @@ orderSchema.methods.updateStatus = function(newStatus, note = '') {
 };
 
 // Índices
-orderSchema.index({ orderNumber: 1 });
+// ✅ REMOVIDO: orderSchema.index({ orderNumber: 1 }); - Duplicado, já está como unique no schema
 orderSchema.index({ user: 1, createdAt: -1 });
 orderSchema.index({ 'items.store': 1, createdAt: -1 });
 orderSchema.index({ status: 1 });

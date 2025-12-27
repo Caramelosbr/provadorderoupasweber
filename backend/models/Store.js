@@ -114,7 +114,7 @@ storeSchema.pre('save', function(next) {
 
 // Índices
 storeSchema.index({ name: 'text', description: 'text' });
-storeSchema.index({ slug: 1 });
+// ✅ REMOVIDO: storeSchema.index({ slug: 1 }); - Duplicado, já está como unique no schema
 storeSchema.index({ owner: 1 });
 storeSchema.index({ 'address.city': 1 });
 storeSchema.index({ isActive: 1 });

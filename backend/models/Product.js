@@ -14,7 +14,8 @@ const productSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    lowercase: true
+    lowercase: true,
+    unique: true  // ✅ Adicionado unique aqui, removido index duplicado abaixo
   },
   description: {
     type: String,
@@ -145,12 +146,14 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  isNew: {
+  // ✅ CORRIGIDO: Renomeado de "isNew" para "isNewProduct"
+  isNewProduct: {
     type: Boolean,
     default: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  suppressReservedKeysWarning: true  // ✅ Suprimir avisos de palavras reservadas
 });
 
 // Gerar slug
@@ -177,6 +180,7 @@ productSchema.index({ category: 1 });
 productSchema.index({ price: 1 });
 productSchema.index({ 'rating.average': -1 });
 productSchema.index({ createdAt: -1 });
-productSchema.index({ slug: 1 });
+// ✅ REMOVIDO: productSchema.index({ slug: 1 }); 
+// Já está definido como unique no schema, não precisa duplicar
 
 module.exports = mongoose.model('Product', productSchema);
