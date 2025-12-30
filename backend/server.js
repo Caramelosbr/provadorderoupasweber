@@ -21,6 +21,7 @@ const cartRoutes = require('./routes/cart.routes');
 const orderRoutes = require('./routes/order.routes');
 const tryonRoutes = require('./routes/tryon.routes');
 const reviewRoutes = require('./routes/review.routes');
+const paymentRoutes = require('./routes/payment.routes');
 
 // Importar middleware de erro
 const errorMiddleware = require('./middlewares/error.middleware');
@@ -59,10 +60,20 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/tryon', tryonRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/payments', paymentRoutes);
 
 // Rota de teste
 app.get('/', (req, res) => {
   res.json({ message: 'Bem-vindo à API do Provador Virtual IA!' });
+});
+
+// 🔥 Rota de verificação do Backend (Health Check)
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: "🟢 Backend OK",
+    message: "Conexão estabelecida com sucesso!",
+    timestamp: new Date()
+  });
 });
 
 // Middleware de erro

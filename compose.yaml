@@ -1,16 +1,26 @@
+version: '3.8'
+
 services:
   backend:
-    build:
-      context: ./backend
+    build: ./backend
+    container_name: weber-backend
     ports:
-      - "3000:3000"
+      - "5000:5000"
     env_file:
       - ./backend/.env
+    networks:
+      - weber-network
 
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
+    container_name: weber-frontend
     ports:
       - "80:80"
     depends_on:
       - backend
+    networks:
+      - weber-network
+
+networks:
+  weber-network:
+    driver: bridge

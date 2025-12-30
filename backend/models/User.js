@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+    asaasCustomerId: {
+    type: String,
+    sparse: true
+  },
   role: {
     type: String,
     enum: ['customer', 'seller', 'admin'],
