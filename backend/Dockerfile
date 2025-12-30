@@ -1,20 +1,20 @@
-# Imagem base estável
+# Backend Dockerfile
 FROM node:20-alpine
 
-# Diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia apenas os arquivos de dependência
+# Copiar package.json e instalar dependências
 COPY package*.json ./
-
-# Instala dependências (SEM --production para ter todas)
 RUN npm install
 
-# Copia o resto do projeto
+# Copiar código
 COPY . .
 
-# Porta usada pelo app
+# Criar pasta de uploads
+RUN mkdir -p uploads/products uploads/users uploads/tryons
+
+# Expor porta
 EXPOSE 5000
 
-# Comando de start
-CMD ["node", "server.js"]
+# Comando para iniciar
+CMD ["npm", "start"]
